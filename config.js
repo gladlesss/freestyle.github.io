@@ -1,7 +1,7 @@
-const Config = {
+﻿const Config = {
 
 	// 这个是网页标签上的文字
-	title: "张三三的简历",
+	title: "Glad的简历",
 
 
 	/*
@@ -9,7 +9,7 @@ const Config = {
 	 */
 	
 	// 姓名
-	name: "张三三",
+	name: "Glad",
 
 	// 求职意向
 	job: "砖体移动工程师",
@@ -102,7 +102,9 @@ const Config = {
 	 				/*
 	 				这是第二条记录的内容
 	 				 */
-	 				content: `    我是第二条记录的描述
+	 				content: `    1. xxx
+    2. xxx
+    3. xxx
 	 				`
 	 			},
 
@@ -150,6 +152,9 @@ const Config = {
 	 			}
 	 		]
 	 	},
+
+
+
 
 
 	 	/* 这是一个空的分类 */
