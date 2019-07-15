@@ -1,0 +1,107 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>简历</title>
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="./config.js"></script>
+	<style>
+		* {margin:0;padding:0;box-sizing:border-box;}
+		html, body {padding: .5rem 0 1rem 0;}
+		#app {width: 10rem;font-size:.2rem;padding: .4rem .3rem;line-height:.5rem;font-weight:bold;max-width: 1280px;box-shadow:2px 2px 5px #ddd;margin:0 auto;}
+		header {display:flex;justify-content:space-between;align-items:center;border-bottom: 5px solid #37b0fe;padding-bottom:5px;margin-bottom:.5rem;}
+		header div {padding: 0 .1rem;max-width: 34%;}
+		header .avatar {height: 1.5rem;}
+		header .name {font-size:.38rem;font-weight:bold;color:#37b0fe;position:relative;top:-.05rem;}
+		header .icon {width: .3rem;position:relative;top:.08rem;left:-.03rem;}
+		header p {word-break:break-all;}
+
+		.content .flex-content {display:flex;align-items:flex-start;overflow: hidden}
+		.content .flex-title {align-items: center;}
+		.content .flex-content .left-content {width: 2rem;}
+		.content .flex-content .right-content {flex:1;position: relative;left: .26rem;padding-left:.2rem;box-shadow: 1px 1px 5px #ccc;}
+		.content .title .title-line {flex:1;position: relative;left: .4rem;border-left:none;border-bottom: 3px solid #37b0fe;}
+		.content .title .title-line img {width:.4rem;position: absolute;top:-.16rem;left:-.34rem}
+		.content .title .title-name {font-size: .28rem;color:#37b0fe;}
+		.content .right-content p img {width:.3rem;position: absolute;left:-.16rem;top:.08rem;}
+		.content .right-content .content-info {font-weight: normal;font-size: .18rem;line-height: .34rem;padding: .1rem .2rem .4rem 0;}
+
+	</style>
+</head>
+<body>
+	<div id="app">
+		
+		<header>
+			<div>
+				<p class="name">{{name}}</p>
+				<p v-if="job"><img class="icon" src="./lib/job.svg" alt="job">{{job}}</p>
+			</div>
+			<div>
+				<p v-if="phone"><img class="icon" src="./lib/phone.svg" alt="phone">{{phone}}</p>
+				<p v-if="email"><img class="icon" src="./lib/email.svg" alt="email">{{email}}</p>
+			</div>
+			<div>
+				<p v-if="age"><img class="icon" src="./lib/age.svg" alt="age">{{age}}</p>
+				<p v-if="addr"><img class="icon" src="./lib/addr.svg" alt="addr">{{addr}}</p>
+			</div>
+			<img class="avatar" src="./avatar.png" alt="照片">
+		</header>
+
+		<div class="content" v-for="(item, i) in categorys" :key="i">
+			<div class="title flex-title flex-content">
+				<p class="title-name left-content">{{item.title}}</p>
+				<p class="title-line"><img src="./lib/block.svg" alt="block"></p>
+			</div>
+
+			<div class="flex-content" v-for="(con, index) in item.list" :key="index">
+				<div class="left-content">
+					{{con.time}}
+				</div>
+				<div class="right-content">
+					<p v-if="con.name"><img src="./lib/sign.svg" alt="sign">{{con.name}}</p>
+					<div class="content-info" v-if="con.content">
+						<pre v-html="con.content"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<p class="ad" style="width:100%;text-align:center;font-size: 12px;margin-top: 40px;">
+		<span >技术支持：<a href="http://site.wqnmd.cn/" target="_blank">site.wqnmd.cn</a></span></p>
+	<script>
+		let app = new Vue({
+			el: '#app',
+			data () {
+				return Config
+			},
+			mounted () {
+				window.addEventListener('orientationchange' in window ? 'orientationchange' : 'resize', this.setRem, false)
+    			this.setRem()
+    			this.setTitle()
+    			this.initAD()
+			},
+			methods: {
+				setRem () {
+					let screenWidth = document.documentElement.clientWidth || window.screen.width || 600
+					screenWidth = screenWidth > 600 ? screenWidth : 600
+					screenWidth = screenWidth > 1080 ? 1080 : screenWidth
+        			document.documentElement.style.fontSize = (100 * screenWidth / 1000) + 'px';
+				},
+				setTitle () {
+					let title = this.title
+					document.title = title
+					window.onfocus = function () {document.title = title}
+					window.onblur = function () {document.title = '您有(1)份未读简历'}
+				},
+				initAD () {
+					if (!this.ad) {
+						let ad = document.querySelector(".ad")
+						ad.style.opacity  ='0'
+					}
+				}
+			}
+		})
+	</script>
+</body>
+</html>
