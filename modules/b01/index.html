@@ -104,11 +104,9 @@
 
 <script>
 "use strict";
-console.log(Config)
 var phrase = Config.boundText
 document.title = Config.title
-window.onload = function () {
-  document.querySelector("#topText").innerHTML = Config.topText
+document.querySelector("#topText").innerHTML = Config.topText
   document.querySelector("#bottomText").innerHTML = Config.bottomText
   let arr = document.querySelectorAll(".project", "after")
   for (let i = 0; i < 8; i++) {
@@ -117,7 +115,6 @@ window.onload = function () {
       arr[i].parentNode.href = "./categary" + (i + 1) + "/index.html?name=" + Config.categarys[i]
     } 
   }
-}
 
 
 
